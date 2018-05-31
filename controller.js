@@ -709,7 +709,7 @@ app.post('/sendFeedback', (req,res) => {
     var con = mysql.createConnection(CONNECTIONSTRING);
     let idishki = req.body.first.split(' ');
     con.connect(function(err) {
-       con.query("select max(group_id) as max from groups_clients", (err, result, fields) => {
+       con.query("select max(groupc_id) as max from groups_clients", (err, result, fields) => {
          if (err) throw err;
          if (result[0]){
              console.log(notbot_order.group);                            
@@ -718,8 +718,8 @@ app.post('/sendFeedback', (req,res) => {
                     if (err) throw err;
                   });
              });
-             con.query("insert into feedback (rate, friend_id, groups_clients_id description, date) VALUES ('" + req.body.third + "','" + req.body.second + "','" + (parseInt(result[0].max) + 1) + "','" + req.body.fourth + 
-             	"','" + (new Date()).toDateString() + "');", function (err, result, fields) {
+             con.query("insert into feedback (rate, friend_id, groups_clients_id, description, date) VALUES ('" + req.body.third + "','" + req.body.second + "','" + (parseInt(result[0].max) + 1) + "','" + req.body.fourth + 
+             	"','" + (new Date()).toLocaleDateString() + "');", function (err, result, fields) {
               	if (err) throw err;
                 console.log(result);
                 res.send('feedback send successfuly... pls go back')
