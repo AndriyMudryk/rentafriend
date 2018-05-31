@@ -11,7 +11,7 @@
  <script>
  $(document).ready(function(){
  $('option').click(function(){
-  var x = $('select').find(":selected").index();
+  var x = $('.select-selected').find(":selected").index();
   $('.baseForms').hide();
   $('.baseForms').eq(x).show();
  })
