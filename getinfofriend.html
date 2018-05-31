@@ -9,20 +9,6 @@
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script language='javascript' type='text/javascript'>
-var password = document.getElementById("password");
-var confirm_password = document.getElementById("confirm_password");
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-</script>
 <script>
   $(document).ready(function(){
   $('option').click(function(){
