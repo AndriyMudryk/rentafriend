@@ -9,11 +9,24 @@
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script language='javascript' type='text/javascript'>
+var password = document.getElementById("password");
+var confirm_password = document.getElementById("confirm_password");
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
 <script>
   $(document).ready(function(){
   $('option').click(function(){
-    var x = $('.select-selected').find(":selected").index();
-    console.log(x);
+    var x = $('select').find(":selected").index();
     $('.baseForms').hide();
     $('.baseForms').eq(x).show();
  })
@@ -96,7 +109,7 @@ $(document).ready(function() {
 	</li>
 	<!-- <li><a id="smi2">FindAFriend</a></li> -->
   <li><a  id="smi3">GetSomeDatabaseInfo</a></li>
-  <li><a id="smi4">Return gift</a></li>
+  <li><a  id="smi4">Return gift</a></li>
 	<li><a>LogOut</a></li>
 </ul>
   <div id="side-menu-item-1" class="side-menu-item column2" style="display: none; float: left; width: 75%">
@@ -231,6 +244,18 @@ $(document).ready(function() {
   </form>
   <iframe class="post" frameborder="0" style="width: 90%;" name="DatabaseSelectsFrame"></iframe>
 </div> 
+<div id="side-menu-item-4" class="side-menu-item column2" style="display: none; float: left; width: 75%">
 
+  <div class="column51">
+      <form class="baseForms" action="/returnGift" style="display:none" method="post" target="DatabaseSelectsFrame">
+        <input type="text" name="first"></input>
+	      <input class="ip" name="ip" type="text" style="display:none">
+	      <button class="sbm" type="submit"> Submit</button>
+      </form>
+  </div>
+  
+
+<iframe class="post" id="giftsInfo" frameborder="2" style="width: 60%;"></iframe>
+</div>
 </body>
 </html>
