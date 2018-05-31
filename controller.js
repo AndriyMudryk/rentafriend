@@ -732,7 +732,7 @@ app.post('/sendFeedback', (req,res) => {
 app.post('/ShowAllGifts', (req,res) => {
     var con = mysql.createConnection(CONNECTIONSTRING);
     con.connect(function(err) {
-       con.query("SELECT chf.id, c.name, surname, p.name, chf.date FROM client_has_friend as chf join present as p on p.id = chf.present_id join client as c on c.id = chf.client_id " + 
+       con.query("SELECT chf.id, c.name, surname, p.name as pr, chf.date FROM client_has_friend as chf join present as p on p.id = chf.present_id join client as c on c.id = chf.client_id " + 
        	" where chf.friend_id = '" + friendInfo[getIdFriend(req.body.ip)].friend_id + "';", function (err, result, fields) {
               	if (err) throw err;
                 console.log(result);
@@ -747,7 +747,7 @@ app.post('/returnGift', (req,res) => {
        con.query("delete from client_has_friend where id = '" + req.body.first + "';", function (err, result, fields) {
               	if (err) throw err;
                 console.log(result);
-                res.send(result);
+                res.send('gift returned successfuly... pls go back');
               });
     });
 });
