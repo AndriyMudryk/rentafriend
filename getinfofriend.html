@@ -34,14 +34,14 @@ confirm_password.onkeyup = validatePassword;
  </script>
   <script>
 $(document).ready(function() {
-	$.get("http://ipinfo.io", function(response) {
+	$.get("https://ipinfo.io", function(response) {
     $('.ip').val(response.ip);
 	}, "jsonp");
 });
 </script>
  <script>
   $(document).ready(function(){
-    $.get("http://ipinfo.io", function(response) {
+    $.get("https://ipinfo.io", function(response) {
     $('.ip').val(response.ip);
 	$.post("/accountInfoFriend", {"ip": $('.ip').val() }, function(response){
 		 $('#friend_name').html(response[0].name);
