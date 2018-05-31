@@ -1,0 +1,100 @@
+.main {
+   font-size: 64px;
+   background-color: #8b9099;
+  
+}
+.header {
+  overflow: hidden;
+  background-color: #fff463;
+}
+
+.header a {
+  float: center; 
+  line-height: 20px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  margin: 42%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Courier, monospace;
+}
+
+.header a:hover {
+  background-color: #666559;
+  opacity: 0.5;
+  color: black;
+}
+
+.header a.active {
+  background-color: #41e28a;
+  color: white;
+}
+
+.btn{
+  background: #31e890;
+  background-image: linear-gradient(to bottom, #fff463, #fcfca9);
+  border-radius: 4px;
+  font-family: Arial;
+  color: #666559;
+  font-size: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 3%;
+}
+
+.btn:hover{
+  background: #3cfa95;
+  background-image: linear-gradient(to bottom, #666559, #fff463);
+  text-decoration: none;
+  color: white;
+}
+
+.headtext{
+	font-family: Veranda;
+	font-size: 40px;
+	color: #666559;
+	font-weight: bold;
+	text-align: center;
+}
+.inpform{
+    width: 80%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+	text-align:center;
+    background-color: white;
+    background-position: 10px 10px; 
+    padding: 12px 20px 12px 40px;
+	margin:5px;
+}
+.post{
+	-webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+	width:60%;
+	box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+    margin: 3% 20%;
+    padding: 24px;
+    overflow: visible;
+    border: 4px solid rgba(165,145,145,1);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font: normal 18px/1 Verdana, Geneva, sans-serif;
+    background-color: #cecebe;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: #ffffff;
+    -webkit-box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.3) ;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.3) ;
+}
+
+
+
+

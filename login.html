@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Sign in
+	</title>
+	<link rel="stylesheet" href="opastyle.css">	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$.get("http://ipinfo.io", function(response) {
+    $('#ip').val(response.ip);
+	}, "jsonp");
+});
+</script>
+</head>
+<body style="background-color:#fff463">
+    <div class="header">	
+		<a href="rentfriend.html" class="logo">
+			<img src="logo.png" alt="here must be a logo" style="width:15%;height:20%">
+		</a>	
+	</div>
+<h2 class="headtext">Log In</h2>
+ 
+<form class="post" style="margin-left:19%" method="post" action="/login"> 
+    <input class="inpform" name="first" type="text" placeholder="Login or Email" required>
+    <input class="inpform" name="second" type="password" placeholder="Password" required>
+	<input class="inpform" name="ip" id="ip" type="text" style="display:none">
+	<div>
+	<button class="sbm" name="submit"> VJO </button>	
+	</div>
+	
+</form>
+</body>
+</html>

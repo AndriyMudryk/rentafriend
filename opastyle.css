@@ -1,0 +1,292 @@
+.enter{
+	background-color:#fff463;
+	background-image: url("yellow_one3.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment:fixed;
+    background-position: center;
+}
+.main {
+   font-size: 64px;
+   background-color: #8b9099;
+  
+}
+
+.header {
+  overflow: hidden;
+  background-color: transparent;
+  line-height: 20px;
+  padding: 0px;
+}
+
+.header a {
+  float: center;   
+  border-radius: 4px;
+}
+
+.header a.logo {
+	margin:42%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Courier, monospace;
+}
+
+.header a.hover {
+  background-color: #fff463;
+  opacity: 0.9;
+  color: yellow;
+}
+
+.header a.active {
+  background-color: #41e28a;
+  color: white;
+}
+
+.btn{
+  background: #31e890;
+  background-image: linear-gradient(to bottom, #fff463, #fcfca9);
+  border-radius: 4px;
+  font-family: Veranda;
+  color: #666559;
+  font-size: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 3%;
+}
+
+.btn:hover{
+  background: #3cfa95;
+  background-image: linear-gradient(to bottom, #666559, #fff463);
+  text-decoration: none;
+  color: white;
+}
+
+.headtext{
+	font-family: Veranda;
+	font-size: 40px;
+	color: #3f3f3e;
+	font-weight: bold;
+	text-align: center;
+}
+.inpform{
+    width: 80%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+	font-family:Veranda;
+	text-align:center;
+    background-color: white;
+    background-position: 10px 10px; 
+    padding: 12px 20px 12px 40px;
+	margin:5px;
+}
+.forframe1{
+	border: 2px solid #ccc;
+    border-radius: 4px;
+	width:90%;
+	float:center;
+}
+.post{
+	-webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+	width:60%;
+	box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+    padding: 24px;
+    overflow: visible;
+    border: 4px solid rgba(165,145,145,1);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font: normal 18px/1 Verdana, Geneva, sans-serif;
+	font-family: Veranda;
+    background-color: #cecebe;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: #ffffff;
+    -webkit-box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.3) ;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.3) ;
+}
+.column1 {
+	background-color:#3f3f3e;
+	display:cover;
+    float: left;
+    width: 13%;
+	min-width:200px;
+}
+.column2 {
+	display:cover;
+    float: left;
+    width: 75%;
+	min-width:500px;
+  margin-left: 30%;
+}
+.column52{
+	display: cover;
+	float:right;
+	width:50%;
+	min-width:250px;
+}
+.column51{
+	display: cover;
+	float:left;
+	width:50%;
+	min-width:250px;
+}
+.inform{
+	background-color:white;
+	border: 2px solid #ccc;
+	border-radius:10px;	
+	font-family: Veranda;
+	text-align: center;
+	font-size: 20px;	
+	padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+	min-width:60px;
+	color: white;	
+    background-color: #3f3f3e;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+.icon{
+	width: 50%;
+	text-align: center;
+	border-radius:50%;
+}
+.simplea{
+	border:none;
+}
+
+li a {
+	font-family: Veranda;
+	text-align: center;
+	font-size: 20px;
+	margin:3%;	
+	border:2px solid white;
+	border-radius: 20px;
+    display: block;
+    color: white;
+    padding: 30px ;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+
+.select-selected {
+	font-family: Veranda;
+	text-align: center;
+	font-size: 20px;
+	background-color:#3f3f3e;
+    border: 2px solid rgba(165,145,145,1);
+  border-radius: 10px;
+  font-size: 16px;
+  padding:8px;
+  float: center;
+  color: white;
+}
+/*style the arrow inside the select element:*/
+.select-selected:hover {
+  opacity: 0.8;
+}
+.forframe{
+	min-width:127%;
+  min-height:200px;
+  width: auto;
+  height: auto;
+}
+
+.inp_num{
+	font-family: Veranda;
+	width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+	text-align:center;
+    background-color: white;
+    background-position: 10px 10px; 
+    padding: 12px;
+	margin:5px 0px;
+}
+.inp_date{
+	width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+	font-family:Veranda;
+    font-size: 16px;
+	text-align:center;
+    background-color: white;
+    background-position: 10px 10px; 
+    padding: 12px;
+	margin:5px 0px;
+}
+.sbm{
+  width:20%;
+  background: #3f3f3e;
+  border-radius: 10px;
+  font-family: Veranda;
+  color:  white;
+  font-size: 16px;
+  padding: 12px;
+  text-decoration: none;
+  margin:5px 0px;
+  min-width:90px;
+}
+.sbm:hover{
+	opacity:0.8;
+}
+
+table.tbl{
+  font-family: Verdana, Geneva, sans-serif;
+  border: 1px solid #80827F;
+  background-color: #3f3f3e;
+  min-width:127%;
+  min-height:200px;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+table.tbl: hover{
+	opacity:0.9;
+}
+table.tbl td, table.tbl th {
+  border: 1px solid #3f3f3e;
+  padding: 7px 1px;
+}
+table.tbl th {
+  background: #3f3f3e;
+}
+table.tbl tbody td {
+  font-size: 13px;
+}
+table.tbl tr:nth-child(even) {
+  background: #F9FFA1;
+}
+table.tbl tr:nth-child(odd) {
+  background: #FFFFFF;
+}
+
+table.tbl thead th {
+  font-size: 15px;
+  font-weight: normal;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 1px solid #80827F;
+}

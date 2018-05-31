@@ -1,0 +1,92 @@
+<html lang="en-US">
+<head>
+	<title>
+		Sign in
+	</title>
+	<link rel="stylesheet" href="opastyle.css">	
+<script language='javascript' type='text/javascript'>
+var password = document.getElementById("password");
+var confirm_password = document.getElementById("confirm_password");
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+/*function check(input) {
+    if (input.value != document.getElementById('password').value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+         // input is valid -- reset the error message
+         input.setCustomValidity('');
+    }
+ }
+*/
+</script>
+</head>
+<body style="background-color:#fff463">
+    <div class="header">	
+		<a href="rentfriend.html" class="logo">
+			<img src="logo.png" alt="here must be a logo" style="width:15%;height:20%">
+		</a>	
+	</div>
+<h2 class="headtext">Sign Up</h2>
+<form style="margin-left:19%" action="/signup" class="post" method="post" class="post">
+  <div>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+	<label for="name"><b>Name</b></label>
+	<br/>
+    <input class="inpform" type="text" placeholder="Enter Name" name="name" required>
+	<br/>
+	
+	<label for="name"><b>Surname</b></label>
+	<br/>
+    <input class="inpform" type="text" placeholder="Enter Name" name="surname" required>
+	<br/></br>
+    <input type="radio" name="people" value="c">Client</input>
+	<input type="radio" name="people" value="f">Friend</input>
+	<br/></br>
+    <label for="email"><b>Email</b></label>
+	<br/>
+    <input class="inpform" type="text" placeholder="Enter Email" name="email">
+	<br/>
+     
+    <label for="psw"><b>Password</b></label>
+	<br/>
+    <input id="password" class="inpform" type="password" title="Enter an password consisting [A-Za-z0-9]{4,14}" placeholder="Enter Password" pattern="[0-9a-zA-Z]{4,14}" name="psw" required>
+    <br/>
+	<p id="temp_p"></p>
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+	<br/>
+    <input id="confirm_password" class="inpform" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <br/>
+     
+	 
+    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+		<a href="rentfriend.html" class="logo">	
+		     <button type="button" class="sbm">Cancel</button>
+		</a>
+      <button type="submit" class="sbm" onclick="return Validate()">Sign Up</button>
+    </div>
+  </div>
+</form> 
+ <script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

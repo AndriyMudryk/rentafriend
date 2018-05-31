@@ -1,0 +1,305 @@
+ <html>
+ <head>
+	<title>
+		Client page
+	</title>
+	<link rel="stylesheet" href="opastyle.css">	
+  <meta charset="UTF-8">
+ <style>
+ </style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script>
+ $(document).ready(function(){
+ $('option').click(function(){
+  var x = $('select').find(":selected").index();
+  $('.baseForms').hide();
+  $('.baseForms').eq(x).show();
+ })
+})
+ </script>
+  <script>
+$(document).ready(function() {
+	$.get("http://ipinfo.io", function(response) {
+    $('.ip').val(response.ip);
+	}, "jsonp");
+});
+</script>
+ <script>
+  $(document).ready(function(){
+	
+    $.get("http://ipinfo.io", function(response) {
+    $('.ip').val(response.ip);
+	$.post("/accountInfoClient", {"ip": $('.ip').val() }, function(response){
+		 $('#client_name').html(response[0].name);
+		 $('#client_surname').html(response[0].surname);
+		 $('#client_login').html(response[0].login);
+	});
+	$.post("/getOrdersClient", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.id + "</td><td>" + i.date + "</td><td>" + i.hours + "</td><td>" + i.price + "</td><td>" + i.holiday_name +  "</td><td>" + i["group_concat(f.name, ' ', f.surname SEPARATOR ', ')"] + "</td></tr>";
+		 });
+		 t += "</table>";
+	     var doc = document.getElementById('ordersInfo').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	$.post("/getAllFriends", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.id + "</td><td>" + i.name + "</td><td>" + i.surname + "</td></tr>";
+		 });
+		 t += "</table>";
+	     var doc = document.getElementById('friends').contentWindow.document;
+         doc.open();
+         doc.write(t);
+		 doc.close();
+		 var doc = document.getElementById('friendFrame').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	$.post("/getAllPresents", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.id + "</td><td>" + i.name + "</td><td>" + i.price + "</td></tr>";
+		 });
+		 t += "</table>";
+		 var doc = document.getElementById('presentFrame').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	$.post("/getAllClients", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.id + "</td><td>" + i.name + "</td><td>" + i.surname + "</td></tr>";
+		 });
+		 t += "</table>";
+		 var doc = document.getElementById('clientFrame').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	$.post("/getAllHolidays", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.id + "</td><td>" + i.name + "</td></tr>";
+		 });
+		 t += "</table>";
+	     var doc = document.getElementById('holidays').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	}, "jsonp");
+    $('#smi1').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-1').show();
+    })
+    $('#smi2').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-2').show();
+    })
+    $('#smi3').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-3').show();
+	})
+	$('#smi4').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-4').show();
+    })
+  })
+ </script>
+ </head>
+ <body class="enter">
+	<ul>
+	<li> <a class="simplea" id="smi1">
+		<img class="icon" src="icon.png" alt="you">
+		</a>
+	</li>
+	<li><a id="smi2">FindAFriend</a></li>
+	<li><a  id="smi3">GetSomeDatabaseInfo</a></li>
+	<li><a href="https://www.facebook.com/messages/t/1729927080384572">Messenger bot (test-mode)</a></li>
+	<li><a id="smi4">Gift/Feedback</a></li>
+	<li><a>LogOut</a></li>
+</ul>
+ 
+
+	
+  <div id="side-menu-item-1" class="side-menu-item column2" style="display: none; float: left; width: 75%">
+		<div class="column51">
+			<div class="post" style="background-color:#ffff6d;width:72%">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Hello, it's you:)</h2>
+				<label for="name"><b>Name</b></label>
+				<p id="client_name" class="inform"> Here must be a name</p>
+				<label for="surname"><b>Surname</b></label><br/>
+				<p id="client_surname" class="inform"> Here must be a surname</p>
+				<label for="name"><b>Login</b></label><br/>
+				<p id="client_login" class="inform"> Here must be a login</p>
+			</div>		
+		</div>
+		<div class="column52">
+			<form method="post" action="/changePasswordClient" class="post" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Change you password here</h2>
+				<label for="name"><b>Enter your password</b></label></br></br>
+				<input class="inpform" style="width:95%;" name="first" type="text" placeholder="Old Password"></br></br>
+				<label for="surname"><b>New one</b></label><br/>
+				<input class="inpform" style="width:95%;" name="second" type="text" placeholder="New Password"></br>
+				<input class="inpform" style="width:95%;" name="third" type="text" placeholder="one more time">
+				<button class="sbm" type="submit"> Submit</button>
+			</form>	
+		</div>	
+	    <h2 class="headtext" style="font-size:26px;margin-top:5px;">Your order</h2>
+	    <iframe class="post" id="ordersInfo" frameborder="2" style="height: 400px; width: 60%;"></iframe>
+  </div>	
+  <div id="side-menu-item-2" class="side-menu-item column2" style="display: none; float: left; width: 75%">
+		<div class="column51">
+			<form class="post" method="post" action="/creatingOrder" target="PriceFrame" style="background-color:#ffff6d;width:72%">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Make order here:)</h2>
+				<label><b>FriendId</b></label>
+				<input class="inpform" style="width:95%;" name="first" type="text" placeholder="FriendId"></br></br>
+				<label><b>Hours</b></label>
+				<input class="inpform" style="width:95%;" name="second" type="text" placeholder="Hours"></br></br>
+				<label><b>Date</b></label>
+				<input class="inpform" style="width:95%;" name="third" type="date" placeholder="Holiday"></br></br>
+				<label><b>Holiday</b></label>
+				<input class="inpform" style="width:95%;" name="fourth" type="text" placeholder="Holiday"></br></br>
+				<button class="sbm" type="submit"> OK</button>	
+			</form></br>
+			<h2 class="headtext" style="font-size:26px;margin-top:5px; margin-right: 20%">Holidays</h2>
+	       <iframe class="post" id="holidays" frameborder="2" style="height: 400px; width: 70%;padding:3px;margin-left:5%;">		</iframe>
+		</div>
+		<div class="column52">
+			<form class="post" action="/agreeOrder" method="post" target="invisible" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Price</h2>
+				<label for="name"><b>Your Price is:</b></label></br></br>
+				<iframe class="post" id="PriceFrame" name="PriceFrame" style="height: 100px; width: 300px"> Here must be a price</iframe> </br>
+				<input class="ip" id="ip" name="ip" type="text" style="display:none">
+				<button class="sbm" type="submit"> Submit </button>
+			</form></br>
+			<h2 class="headtext" style="font-size:26px;margin-top:5px;margin-right:22%">Available Friends</h2>
+	        <iframe class="post" id="friends" frameborder="2" style="height: 400px; width:70%;padding:3px;"></iframe>
+			<iframe id="invisible" style="display:none"></iframe>
+		</div>
+	</div>	
+
+  <div  id="side-menu-item-3" class="dropdown side-menu-item column2" style="display: none; float: left; width: 75%">
+  <select class="select-selected"  style="width: 90%;">
+    <option value="1">Знайти усіх друзів, яких він наймав принаймні N разів за вказаний період (з дати F по дату T)</option>
+    <option value="2">Знайти усіх найманих друзів, яких наймали хоча б N разів за вказаний період (з дати F по дату T)</option>
+  	<option value="3">Знайти сумарну кількість побачень по місяцях</option>
+  	<option value="4">Вивести подарунки у порядку спадання середньої кількості вихідних, що брали наймані друзі,</br> які отримували подарунок від Вас протягом вказаного періоду (з дати F по дату T)</option>
+  	<option value="5">Вивести найманих друзів у порядку спадання кількості скарг від груп з принаймні N клієнтів за вказаний період (з дати F по дату Т)</option>
+  	<option value="6">Знайти усі спільні події для вас та найманого друга Х за вказаний період (з дати F по дату T)</option>
+  	<option value="7">Знайти усі дні коли вихідними були від A до В найманих друзів включно</option>
+  </select>
+  <form class="baseForms" action="/getinfoclient" method="post" target="DatabaseSelectsFrame">
+      <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+      <input type="text" name="id" value="1" style="display: none;"></input>
+	  <input class="ip" name="ip" type="text" style="display:none"> </input>
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfoclient" style="display:none;" method="post" target="DatabaseSelectsFrame">
+	 <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="2" style="display: none;"></input>
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfoclient" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="3" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfoclient" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="4" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+   <form class="baseForms" action="/getinfoclient" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="5" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfoclient" style="display:none;" method="post" target="DatabaseSelectsFrame">
+      <label for="first">X:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="6" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfoclient" style="display:none" method="post" target="DatabaseSelectsFrame">
+	 <label for="first">А:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="first">B:</label></br>
+	  <input class="inp_num" type="text" name="second" required></input></br>
+    <input type="text" name="id" value="7" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+
+  <iframe class="post" frameborder="2" style="height: 400px; width: 90%;" name="DatabaseSelectsFrame"></iframe>
+</div>
+<div id="side-menu-item-4" class="side-menu-item column2" style="display: none; float: left; width: 75%">
+		<div class="column51">
+			<form method="post" action="/sendGift" class="post" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Send a present</h2>
+				<label for="name"><b>Enter friend id</b></label></br></br>
+				<input class="inpform" style="width:95%;" name="first" type="text" ></br></br>
+				<label for="surname"><b>Present</b></label><br/>
+				<input class="inpform" style="width:95%;" name="second" type="text"></br>
+				<input class="ip" id="ip" name="ip" type="text" style="display:none">
+				<button class="sbm" type="submit"> Submit</button>
+			</form>		
+		</div>
+		<div class="column52">
+			<form method="post" action="/sendFeedback" class="post" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+				<h2 class="headtext" style="font-size:26px;margin-top:5px;">Send a present</h2>
+				<label for="name"><b>Clents id(dont forget to enter yours as well)</b></label></br></br>
+				<input class="inpform" style="width:95%;" name="first" type="text" ></br></br>
+				<label for="surname"><b>Friend id</b></label><br/>
+				<input class="inpform" style="width:95%;" name="second" type="text"></br>
+				<label for="surname"><b>Rate from 1 to 10</b></label><br/>
+				<input class="inpform" style="width:95%;" name="third" type="text"></br>
+				<label for="surname"><b>Description</b></label><br/>
+				<input class="inpform" style="height:200px; width:95%;" name="fourth" type="text"></br>
+				<input class="ip" id="ip" name="ip" type="text" style="display:none">
+				<button class="sbm" type="submit"> Submit</button>
+			</form>		
+		</div>	
+	    <h2 class="headtext" style="font-size:26px;margin-top:5px;">Required info listed under</h2>
+		<iframe class="post" id="presentFrame" frameborder="2" style="height: 400px; width: 50%;"></iframe>
+		<iframe class="post" id="clientFrame" frameborder="2" style="height: 400px; width: 50%;"></iframe>
+		<iframe class="post" id="friendFrame" frameborder="2" style="height: 400px; width: 50%;"></iframe>
+  </div>	
+ 
+</body>
+</html>

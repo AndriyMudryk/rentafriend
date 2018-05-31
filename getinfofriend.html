@@ -1,0 +1,232 @@
+ <html>
+ <head>
+ <title>
+		Client page
+	</title>
+	<link rel="stylesheet" href="opastyle.css">	
+  <meta charset="UTF-8">
+ <style>
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script language='javascript' type='text/javascript'>
+var password = document.getElementById("password");
+var confirm_password = document.getElementById("confirm_password");
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+<script>
+  $(document).ready(function(){
+  $('option').click(function(){
+    var x = $('select').find(":selected").index();
+    $('.baseForms').hide();
+    $('.baseForms').eq(x).show();
+ })
+})
+ </script>
+  <script>
+$(document).ready(function() {
+	$.get("http://ipinfo.io", function(response) {
+    $('.ip').val(response.ip);
+	}, "jsonp");
+});
+</script>
+ <script>
+  $(document).ready(function(){
+    $.get("http://ipinfo.io", function(response) {
+    $('.ip').val(response.ip);
+	$.post("/accountInfoFriend", {"ip": $('.ip').val() }, function(response){
+		 $('#friend_name').html(response[0].name);
+		 $('#friend_surname').html(response[0].surname);
+		 $('#friend_login').html(response[0].login);
+		 var old_password = response[0].password;
+		 var password = document.getElementById("old_password");
+         function validatePassword(){
+            if(password.value != old_password) {
+               confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+               confirm_password.setCustomValidity('');
+            }
+         }
+
+         password.onchange = validatePassword;
+	});
+	$.post("/getOrdersFriend", {"ip": $('.ip').val() }, function(response){
+		 var t = "<head><link rel='stylesheet' href='opastyle.css'></head><table class='tbl'>";
+		 response.forEach(function(i){
+		     t += "<tr>" + "<td>" + i.date + "</td><td>" + i.hours + "</td><td>" + i.price + "</td><td>" + i.holiday +  "</td><td>" + i.name + "</td><td>" + i.surname + "</td></tr>";
+		 });
+		 t += "</table>";
+	     var doc = document.getElementById('ordersInfo').contentWindow.document;
+         doc.open();
+         doc.write(t);
+         doc.close();
+	});
+	}, "jsonp");
+    $('#smi1').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-1').show();
+    })
+    $('#smi2').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-2').show();
+    })
+    $('#smi3').click(function(){
+      $('.side-menu-item').hide();
+      $('#side-menu-item-3').show();
+    })
+  })
+ </script>
+ </head>
+ <body class="enter">
+  <ul>
+	<li> <a class="simplea" id="smi1">
+		<img class="icon" src="friendlogo.png" alt="you">
+		</a>
+	</li>
+	<!-- <li><a id="smi2">FindAFriend</a></li> -->
+	<li><a  id="smi3">GetSomeDatabaseInfo</a></li>
+	<li><a>LogOut</a></li>
+</ul>
+  <div id="side-menu-item-1" class="side-menu-item column2" style="display: none; float: left; width: 75%">
+
+          <div class="column51">
+              <div class="post" style="background-color:#ffff6d;width:72%">
+                <h2 class="headtext" style="font-size:26px;margin-top:5px;">Hello, it's you:)</h2>
+                <label for="name"><b>Name</b></label>
+                <p id="friend_name" class="inform"> Here must be a name</p>
+                <label for="surname"><b>Surname</b></label><br/>
+                <p id="friend_surname" class="inform"> Here must be a surname</p>
+                <label for="name"><b>Login</b></label><br/>
+                <p id="friend_login" class="inform"> Here must be a login</p>
+              </div>    
+          </div>
+          <div class="column52">
+              <div class="post" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+                <h2 class="headtext" style="font-size:26px;margin-top:5px;">Change you password here</h2>
+                <label for="name"><b>Enter your password</b></label></br></br>
+                <input id="old_password" class="inpform" style="width:95%;" name="first" type="text" placeholder="Old Password" required></br></br>
+                <label for="surname"><b>New one</b></label><br/>
+                <input id="password" class="inpform" style="width:95%;" name="second" type="text" placeholder="New Password" required></br>
+                <input id="confirm_password" class="inpform" style="width:95%;" name="third" type="text" placeholder="one more time" required>
+                <button class="sbm" type="submit"> Submit</button>
+              </div>  
+          </div>
+        <h2 class="headtext" style="font-size:26px;margin-top:5px;">Your order</h2>
+	    <iframe class="post" id="ordersInfo" frameborder="2" style="width: 60%;"></iframe>
+  </div>
+  <div id="side-menu-item-2" class="side-menu-item column2" style="display: none; float: left; width: 75%">
+       <iframe frameborder="0" style="width: 50%; margin: 20px" name="friendRequestsFrame"></iframe>
+  </div>
+
+  <div id="side-menu-item-3" class="dropdown side-menu-item column2" style="display: none; float: left; width: 75%">
+  <select class="select-selected" style="width: 90%;" >
+    <option value="1">Знайти усіх клієнтів, які наймали Вас принаймні N разів за вказаний період (з дати F по дату T)</option>
+    <option value="2">Знайти усі свята, на які вас наймали принаймні N разів за вказаний період (з дати F по дату T)</option>
+  	<option value="3">Знайти усіх клієнтів, які наймали щонайменше N різних друзів за вказаний період (з дати F по дату Т)</option>
+  	<option value="4">Знайти сумарну кількість побачень по місяцях</option>
+  	<option value="5">Знайти скільки разів за вказаний період (з дати F по дату T) Ви були найняті на певне свято у групі принаймні з N друзів</option>
+  	<option value="6">Вивести найманих друзів у порядку спадання кількості скарг від груп з принаймні N клієнтів за вказаний період (з дати F по дату Т)</option>
+  	<option value="7">Знайти усі спільні події для вас та клієнта С за вказаний період (з дати F по дату T)</option>
+  	<option value="8">Знайти усі дні коли вихідними були від A до В найманих друзів включно</option>
+  	<option value="9">По місяцях знайти середню кількістю клієнтів у групі, що реєстрували скаргу на Вас</option>
+  </select>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="1" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="2" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+       <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+    <input type="text" name="id" value="3" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="second">Mounth:</label></br>
+	  <!-- <input class="inp_date" type="date" name="first" required></input></br> -->
+      <input type="text" name="id" value="4" style="display: none;"></input>
+	  <input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+  <label for="first">N:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="second">Date from:</label></br>
+	  <input class="inp_date" type="date" name="second" required></input></br>	  
+	  <label for="third">Date To: </label></br>
+	  <input class="inp_date" type="date" name="third" required></input></br>
+      <input type="text" name="id" value="5" style="display: none;"></input>
+	  <input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">N</label></br>
+      <input type="text" class="inp_num" name="first" required> </input> </br>
+	  <label for="first">Date From:</label></br>
+	  <input type="date" class="inp_date" name="second" required> </input> </br>
+	  <label for="first">Date To:</label></br>
+	  <input type="date" class="inp_date" name="third" required>  </input> </br>
+    <input type="text" name="id" value="6" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">Name</label></br>
+      <input type="text" class="inp_num" name="first" required> </input> </br>
+	  <label for="first">Date From:</label></br>
+	  <input type="date" class="inp_date" name="second" required> </input> </br>
+	  <label for="first">Date To:</label></br>
+	  <input type="date" class="inp_date" name="third" required>  </input> </br>
+    <input type="text" name="id" value="7" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form  class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <label for="first">А:</label></br>
+      <input class="inp_num" type="text" name="first" required></input></br>
+	  <label for="first">B:</label></br>
+	  <input class="inp_num" type="text" name="second" required></input></br>
+    <input type="text" name="id" value="8" style="display: none;"></input>
+	<input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <form class="baseForms" action="/getinfofriend" style="display:none" method="post" target="DatabaseSelectsFrame">
+      <input type="text" name="id" value="9" style="display: none;"></input>
+	  <input class="ip" name="ip" type="text" style="display:none">
+	  <button class="sbm" type="submit"> Submit</button>
+  </form>
+  <iframe class="post" frameborder="0" style="width: 90%;" name="DatabaseSelectsFrame"></iframe>
+</div> 
+</body>
+</html>
