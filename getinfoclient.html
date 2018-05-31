@@ -19,7 +19,7 @@
  </script>
   <script>
 $(document).ready(function() {
-	$.get("http://ipinfo.io", function(response) {
+	$.get("https://ipinfo.io", function(response) {
     $('.ip').val(response.ip);
 	}, "jsonp");
 });
@@ -27,7 +27,7 @@ $(document).ready(function() {
  <script>
   $(document).ready(function(){
 	
-    $.get("http://ipinfo.io", function(response) {
+    $.get("https://ipinfo.io", function(response) {
     $('.ip').val(response.ip);
 	$.post("/accountInfoClient", {"ip": $('.ip').val() }, function(response){
 		 $('#client_name').html(response[0].name);
