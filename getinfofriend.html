@@ -137,7 +137,7 @@ $(document).ready(function() {
               </div>  
           </div>
         <h2 class="headtext" style="font-size:26px;margin-top:5px;">Your order</h2>
-	    <iframe class="post" id="ordersInfo" frameborder="2" style="width: 60%;"></iframe>
+	    <iframe class="post" id="ordersInfo" frameborder="2" style="height: 400px; width: 60%;"></iframe>
   </div>
   <div id="side-menu-item-2" class="side-menu-item column2" style="display: none; float: left; width: 75%">
        <iframe frameborder="0" style="width: 50%; margin: 20px" name="friendRequestsFrame"></iframe>
@@ -242,20 +242,22 @@ $(document).ready(function() {
 	  <input class="ip" name="ip" type="text" style="display:none">
 	  <button class="sbm" type="submit"> Submit</button>
   </form>
-  <iframe class="post" frameborder="0" style="width: 90%;" name="DatabaseSelectsFrame"></iframe>
+  <iframe class="post" frameborder="0" style="height: 400px; width: 90%;" name="DatabaseSelectsFrame"></iframe>
 </div> 
 <div id="side-menu-item-4" class="side-menu-item column2" style="display: none; float: left; width: 75%">
 
   <div class="column51">
-      <form class="baseForms" action="/returnGift" method="post" target="DatabaseSelectsFrame">
-        <input type="text" name="first"></input>
-	      <input class="ip" name="ip" type="text" style="display:none">
-	      <button class="sbm" type="submit"> Submit</button>
-      </form>
+      <form method="post" action="/returnGift" class="post" style="background-color:#ffff6d;width:72%;margin-left:7%;padding-bottom:6%;">
+      <h2 class="headtext" style="font-size:26px;margin-top:5px;">Return a present</h2>
+      <label for="name"><b>Enter friend id</b></label></br></br>
+      <input class="inpform" style="width:95%;" name="first" type="text" ></br></br>
+      <input class="ip" id="ip" name="ip" type="text" style="display:none">
+      <button class="sbm" type="submit"> Submit</button>
+    </form>	
   </div>
   
 
-<iframe class="post" id="giftsInfo" frameborder="2" style="width: 60%;"></iframe>
+<iframe class="post" id="giftsInfo" frameborder="2" style="height: 400px; width: 60%;"></iframe>
 </div>
 </body>
 </html>
